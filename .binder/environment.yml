@@ -1,0 +1,9 @@
+dependencies:
+  - bokeh
+  - pyproj
+  - geojson
+  - h3
+  - pip
+  - pip:
+    - nbserverproxy
+    - jupyter-server-proxy
