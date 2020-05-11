@@ -1,6 +1,8 @@
 dependencies:
   - bokeh
   - pyproj
+  - pandas
+  - numpy
   - geojson
   - h3
   - pip
