@@ -350,18 +350,18 @@ def my_slider_handler():
         
         wid=datetime.datetime.strptime(drs_start.value[0:10], '%Y-%m-%d').date()
         
-        print('wid',wid,type(wid))
+        #print('wid',wid,type(wid))
         start_date=datetime.datetime(wid.year,wid.month,wid.day,int(drs_start_hour.value))
-        print('start_date',start_date)
+        #print('start_date',start_date)
         
         wid2=datetime.datetime.strptime(drs_end.value[0:10], '%Y-%m-%d').date()
         end_date=datetime.datetime(wid2.year,wid2.month,wid2.day,int(drs_end_hour.value))
-        print('end_date',end_date)
+        #print('end_date',end_date)
 
 
         #pdict['ms']=max(df['rental_started_at'])
         
-        print(start_date,end_date)
+        #print(start_date,end_date)
         
        
         df=df[(df['rental_started_at']>str(start_date)) & (df['rental_started_at']<str(end_date))]
@@ -370,8 +370,8 @@ def my_slider_handler():
         #print(df.columns)
         CID=list(set(df['customer_id'].astype('str')))
         select_cid.options=CID
-        print(len(df))
-        print('CID',CID)
+        #print(len(df))
+        #print('CID',CID)
         
         if 0 in cid_filter.active:
             df=df[df['customer_id']==int(select_cid.value)]
@@ -632,10 +632,16 @@ def file_upload():
     global input_file
     input_file = pd.read_csv(f)
     print(len(input_file))
+    pre.text='<h4 style="border-top: 2px solid #778899;width: 1600px"><br><b style="color:slategray">Upload completed!....</b><br></h4>'
+
+
+def file_upload_click():
+    pre.text='<h4 style="border-top: 2px solid #778899;width: 1600px"><br><b style="color:slategray">Upload in Progress....</b><br></h4>'
+    curdoc().add_next_tick_callback(file_upload)
 
 
 fu= Button(label='Upload File')
-fu.on_click(file_upload)   
+fu.on_click(file_upload_click)   
 
  
 """
