@@ -9,4 +9,6 @@ dependencies:
   - pip
   - pip:
     - nbserverproxy
+    - h3
+    - geojson
     - jupyter-server-proxy
