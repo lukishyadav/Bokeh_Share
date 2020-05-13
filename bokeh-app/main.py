@@ -618,12 +618,12 @@ def update_click():
     curdoc().add_next_tick_callback(my_slider_handler)
 
 
-bt = Button(label='Update Plot')
+bt = Button(label='Update Plot',css_classes=['custom_button_1'],button_type="success")
 bt.on_click(update_click)   
 
 
 
-def file_upload():
+def file_upload(attr,old,new):
     print("fit data upload succeeded")
 
     decoded = b64decode(file_input.value)
@@ -635,15 +635,19 @@ def file_upload():
     pre.text='<h4 style="border-top: 2px solid #778899;width: 1600px"><br><b style="color:slategray">Upload completed!....</b><br></h4>'
 
 
-def file_upload_click():
+def file_upload_click(attr,old,new):
+    print(new)
     pre.text='<h4 style="border-top: 2px solid #778899;width: 1600px"><br><b style="color:slategray">Upload in Progress....</b><br></h4>'
-    curdoc().add_next_tick_callback(file_upload)
+    
 
 
 fu= Button(label='Upload File')
-fu.on_click(file_upload_click)   
-
+#fu.on_click(file_upload_click)  
+from bokeh.events import ButtonClick
  
+file_input = FileInput(accept=".csv,.json,.txt,.pdf,.xls")
+file_input.on_change('filename',file_upload_click)
+file_input.on_change('value',file_upload)  
 """
 WIDGETS
 
@@ -1263,7 +1267,7 @@ def hex_filter_callback(attr,old,new):
     """
     
 
-file_input = FileInput(accept=".csv,.json,.txt,.pdf,.xls")
+
 
 #hex_filter_no.on_change('value',hex_filter_callback)
 
@@ -1284,7 +1288,7 @@ layout = column(row(carsharing_text,height=70),row(
                 column(row(height=100),main_tab,
                 width=400),
             
-        ),row(height=10), row(file_input,fu),#row(widgetbox(date_text)),
+        ),row(height=10), row(file_input),#row(widgetbox(date_text)),
                 #row(widgetbox(date_widget,width=1400)),
                 width=1500)
 
